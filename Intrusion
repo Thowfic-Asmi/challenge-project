@@ -1,0 +1,78 @@
+Intrusion Detection
+import numpy as np
+import pandas as pd
+import time
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.tree import DecisionTreeClassifier
+Loading the dataset
+df = pd.read_csv("https://raw.githubusercontent.com/Vatshayan/Network-Intrusion-Detection/main/networkintrusion.csv")
+Summarizing the Dataset
+df.columns
+Index(['duration', 'protocol_type', 'service', 'flag', 'src_bytes',
+       'dst_bytes', 'land', 'wrong_fragment', 'urgent', 'hot',
+       'num_failed_logins', 'logged_in', 'num_compromised', 'root_shell',
+       'num_root', 'num_shells', 'num_access_files', 'num_outbound_cmds',
+       'is_host_login', 'is_guest_login', 'count', 'srv_count', 'serror_rate',
+       'srv_serror_rate', 'rerror_rate', 'srv_rerror_rate', 'same_srv_rate',
+       'diff_srv_rate', 'srv_diff_host_rate', 'dst_host_count',
+       'dst_host_srv_count', 'dst_host_same_srv_rate',
+       'dst_host_diff_srv_rate', 'dst_host_same_src_port_rate',
+       'dst_host_srv_diff_host_rate', 'dst_host_serror_rate',
+       'dst_host_srv_serror_rate', 'dst_host_rerror_rate',
+       'dst_host_srv_rerror_rate', 'class'],
+      dtype='object')
+df.nunique()
+duration                        624
+protocol_type                     3
+service                          64
+flag                             11
+src_bytes                      1149
+dst_bytes                      3649
+land                              2
+wrong_fragment                    3
+urgent                            4
+hot                              16
+num_failed_logins                 5
+logged_in                         2
+num_compromised                  23
+root_shell                        2
+num_root                         20
+num_shells                        4
+num_access_files                  5
+num_outbound_cmds                 1
+is_host_login                     2
+is_guest_login                    2
+count                           495
+srv_count                       457
+serror_rate                      88
+srv_serror_rate                  82
+rerror_rate                      90
+srv_rerror_rate                  93
+same_srv_rate                    75
+diff_srv_rate                    99
+srv_diff_host_rate               84
+dst_host_count                  256
+dst_host_srv_count              256
+dst_host_same_srv_rate          101
+dst_host_diff_srv_rate          101
+dst_host_same_src_port_rate     101
+dst_host_srv_diff_host_rate      58
+dst_host_serror_rate             99
+dst_host_srv_serror_rate        101
+dst_host_rerror_rate            101
+dst_host_srv_rerror_rate        100
+class                             2
+dtype: int64
+df.describe()
+duration	src_bytes	dst_bytes	land	wrong_fragment	urgent	hot	num_failed_logins	logged_in	num_compromised	...	dst_host_count	dst_host_srv_count	dst_host_same_srv_rate	dst_host_diff_srv_rate	dst_host_same_src_port_rate	dst_host_srv_diff_host_rate	dst_host_serror_rate	dst_host_srv_serror_rate	dst_host_rerror_rate	dst_host_srv_rerror_rate
+count	22544.000000	2.253800e+04	2.253800e+04	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	...	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000	22544.000000
+mean	218.859076	1.039812e+04	2.055584e+03	0.000311	0.008428	0.000710	0.105394	0.021647	0.442202	0.119899	...	193.869411	140.750532	0.608722	0.090540	0.132261	0.019638	0.097814	0.099426	0.233385	0.226683
+std	1407.176612	4.728493e+05	2.122190e+04	0.017619	0.142599	0.036473	0.928428	0.150328	0.496659	7.269597	...	94.035663	111.783972	0.435688	0.220717	0.306268	0.085394	0.273139	0.281866	0.387229	0.400875
+min	0.000000	0.000000e+00	0.000000e+00	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	...	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+25%	0.000000	0.000000e+00	0.000000e+00	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	...	121.000000	15.000000	0.070000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+50%	0.000000	5.400000e+01	4.600000e+01	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000	...	255.000000	168.000000	0.920000	0.010000	0.000000	0.000000	0.000000	0.000000	0.000000	0.000000
+75%	0.000000	2.870000e+02	6.010000e+02	0.000000	0.000000	0.000000	0.000000	0.000000	1.000000	0.000000	...	255.000000	255.000000	1.000000	0.060000	0.030000	0.010000	0.000000	0.000000	0.360000	0.170000
+max	57715.000000	6.282565e+07	1.345927e+06	1.000000	3.000000	3.000000	101.000000	4.000000	1.000000	796.000000	...	255.000000	255.000000	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000	1.000000
+8 rows × 36 columns
