@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waste Management App</title>
+    <link rel="stylesheet" href="waste.css">
+</head>
+<body>
+    <header>
+        <h1>Waste Management App</h1>
+        <nav>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li><a href="#login">Login</a></li>
+              <li><a href="#register">Register</a></li>
+                <li><a href="#report-waste">Report Waste</a></li>
+                <li><a href="#track-collection">Track Collection</a></li>
+                <li><a href="#notifications">Notifications</a></li>
+                <li><a href="#profile">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="home">
+      <h1>Welcome to Waste Management App</h1>
+      <p>Manage and report waste in your community efficiently.</p>
+  </section>
+
+  <section id="about">
+      <h2>About Us</h2>
+      <p>We provide a platform for users to report waste, track collection status, and receive notifications about waste management in their area.</p>
+  </section>
+
+  <section id="services">
+      <h2>Our Services</h2>
+      <ul>
+          <li>Report Waste</li>
+          <li>Track Waste Collection</li>
+          <li>Receive Notifications</li>
+          <li>Manage Profile</li>
+      </ul>
+  </section>
+
+  <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Email: info@wastemanagementapp.com</p>
+  </section>
+
+  <section id="login">
+      <h2>Login</h2>
+      <form>
+          <label for="login-email">Email:</label>
+          <input type="email" id="login-email" name="email" required>
+          
+          <label for="login-password">Password:</label>
+          <input type="password" id="login-password" name="password" required>
+          
+          <button type="submit">Login</button>
+      </form>
+  </section>
+
+  <section id="register">
+      <h2>Register</h2>
+      <form>
+          <label for="register-name">Name:</label>
+          <input type="text" id="register-name" name="name" required>
+          
+          <label for="register-email">Email:</label>
+          <input type="email" id="register-email" name="email" required>
+          
+          <label for="register-password">Password:</label>
+          <input type="password" id="register-password" name="password" required>
+          
+          <button type="submit">Register</button>
+      </form>
+  </section>
+
+    <!-- Registration/Login Section -->
+    <section id="login">
+        <h2>Login/Register</h2>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+            <button type="button">Register</button>
+        </form>
+    </section>
+
+    <!-- Report Waste Section -->
+    <section id="report-waste">
+        <h2>Report Waste</h2>
+        <form>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="waste-type">Type of Waste:</label>
+            <select id="waste-type" name="waste-type" required>
+                <option value="plastic">Plastic</option>
+                <option value="organic">Organic</option>
+                <option value="electronic">Electronic</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="image-upload">Upload Image:</label>
+            <input type="file" id="image-upload" name="image-upload" accept="image/*" required>
+
+            <button type="submit">Report</button>
+        </form>
+    </section>
+
+    <!-- Track Waste Collection Section -->
+    <section id="track-collection">
+        <h2>Track Waste Collection</h2>
+        <p>Check the status of your reported waste collections:</p>
+        <ul>
+            <li>Report ID: 1234 - Status: Collected</li>
+            <li>Report ID: 5678 - Status: Pending</li>
+            <li>Report ID: 9101 - Status: In Progress</li>
+        </ul>
+    </section>
+
+    <!-- Notifications Section -->
+    <section id="notifications">
+        <h2>Notifications</h2>
+        <ul>
+            <li>Waste collection for your area is scheduled for tomorrow.</li>
+            <li>Your reported waste has been collected.</li>
+            <li>Reminder: Please separate recyclables and non-recyclables.</li>
+        </ul>
+    </section>
+
+    <!-- Profile Management Section -->
+    <section id="profile">
+        <h2>Profile</h2>
+        <form>
+            <label for="username-profile">Username:</label>
+            <input type="text" id="username-profile" name="username-profile" value="john_doe" readonly>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" value="john@example.com" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" name="phone" value="123-456-7890">
+
+            <button type="submit">Update Profile</button>
+        </form>
+
+        <h3>Report History</h3>
+        <ul>
+            <li>Report ID: 1234 - Location: Park Street - Status: Collected</li>
+            <li>Report ID: 5678 - Location: Maple Avenue - Status: Pending</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Waste Management App</p>
+    </footer>
+</body>
+</html>
